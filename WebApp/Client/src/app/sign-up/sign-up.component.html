@@ -1,0 +1,43 @@
+<div class="row card-panel hoverable">
+  <form class="col s12" #userRegistrationFrom="ngForm" (ngSubmit)="OnSubmit(userRegistrationFrom)">
+    <div class="row">
+      <div class="col s6">
+        <h3>Registration Form {{test.Username}}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input type="text" class="validate" name="Username" #Username="ngModel" [(ngModel)]="test.Username" required minlength="3">
+        <label data-error="Required Field!">Username</label>
+      </div>
+      <div class="input-field col s6">
+        <input type="password" class="validate" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required minlength="3">
+        <label data-error="Required Field!">Password</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="email" class="validate" name="Email" #Email="ngModel" [(ngModel)]="user.Email" required [email]="true">
+        <label data-error="Required Field!">Email</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input type="text" class="validate" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
+        <label>First Name</label>
+      </div>
+      <div class="input-field col s6">
+        <input type="text" class="validate" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName">
+        <label>Last Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <button [disabled]="!userRegistrationFrom.valid" class="btn waves-effect waves-light" type="submit" name="action">
+          Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
