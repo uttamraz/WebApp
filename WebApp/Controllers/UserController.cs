@@ -12,9 +12,36 @@ namespace WebApp.Controllers
     {
         [Route("api/User/Register")]
         [HttpPost]
-        public bool Register(AccountModel model)
+        public AccountModel Register(AccountModel model)
         {
-            return true;
+            return model;
+        }
+
+
+        [Route("api/User/UserList")]
+        [HttpGet]
+        public List<AccountModel> UserList()
+        {
+            var userList = new List<AccountModel>();
+            var user1 = new AccountModel
+            {
+                Username = "Kiran",
+                Password = "Password",
+                Email = "Kiran@mail.com",
+                FirstName = "Kiran",
+                LastName = "Gurung",
+            };
+            userList.Add(user1);
+            var user2 = new AccountModel
+            {
+                Username = "Dhan",
+                Password = "Password",
+                Email = "DhanSingh@mail.com",
+                FirstName = "Dhan",
+                LastName = "Singh",
+            };
+            userList.Add(user2);
+            return userList;
         }
     }
 }

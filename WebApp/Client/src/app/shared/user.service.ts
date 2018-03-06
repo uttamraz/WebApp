@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Response } from '@angular/http';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import { User } from './user.model';
+import { User } from "./user";
 
 @Injectable()
 export class UserService {
     readonly rootUrl = 'http://localhost:21360/';
     constructor(private http: HttpClient) { }
 
-    registerUser(user: User) {
-        const body: User = {
+    registerUser(user: any) {
+        const body: any = {
             Username: user.Username,
             Password: user.Password,
             Email: user.Email,
@@ -20,5 +18,10 @@ export class UserService {
         }
         return this.http.post(this.rootUrl + 'api/User/Register', body);
     }
+
+    getUser(): Observable<User[]> {
+        return this.http.get<User[]>(this.rootUrl + 'api/User/UserList');
+    }
+
 
 }

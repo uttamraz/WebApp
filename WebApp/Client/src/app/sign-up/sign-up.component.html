@@ -1,43 +1,78 @@
 <div class="row card-panel hoverable">
-  <form class="col s12" #userRegistrationFrom="ngForm" (ngSubmit)="OnSubmit(userRegistrationFrom)">
+  <form class="col s12" [formGroup]="form" (ngSubmit)="OnSubmit(userRegistrationFrom)">
     <div class="row">
       <div class="col s6">
-        <h3>Registration Form {{test.Username}}</h3>
+        <h3>Registration Form</h3>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s6">
-        <input type="text" class="validate" name="Username" #Username="ngModel" [(ngModel)]="test.Username" required minlength="3">
-        <label data-error="Required Field!">Username</label>
+        <input type="text" class="validate" formControlName="Username" required minlength="3" maxlength="35">
+        <label>Username</label>
       </div>
       <div class="input-field col s6">
-        <input type="password" class="validate" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required minlength="3">
-        <label data-error="Required Field!">Password</label>
+        <input type="password" class="validate" formControlName="Password" required minlength="3" maxlength="32">
+        <label>Password</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input type="email" class="validate" name="Email" #Email="ngModel" [(ngModel)]="user.Email" required [email]="true">
-        <label data-error="Required Field!">Email</label>
+        <input type="email" class="validate" formControlName="Email" required maxlength="32">
+        <label>Email</label>
+        <div *ngIf="form.get('Email').errors" class="text-danger">
+          😢 Oh noes, this email is already taken!
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s6">
-        <input type="text" class="validate" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
+        <input type="text" class="validate" formControlName="FirstName" maxlength="20">
         <label>First Name</label>
       </div>
       <div class="input-field col s6">
-        <input type="text" class="validate" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName">
+        <input type="text" class="validate" formControlName="LastName" maxlength="20">
         <label>Last Name</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <button [disabled]="!userRegistrationFrom.valid" class="btn waves-effect waves-light" type="submit" name="action">
+        <button [disabled]="!form.valid" class="btn waves-effect waves-light" type="submit" name="action">
           Submit
           <i class="material-icons right">send</i>
         </button>
       </div>
     </div>
   </form>
+</div>
+
+<div class="row card-panel hoverable">
+
+  <div class="col s12">
+
+    <div class="row">
+      <button class="btn waves-effect waves-light" (click)="GetUser()">
+        GetUsers
+      </button>
+    </div>
+    <div class="row" *ngIf="users.length > 0">
+      <table class="bordered striped">
+             <thead>
+               <tr>
+                 <th>Username</th>
+                 <th>Email</th>
+                 <th>First Name</th>
+                 <th>Last Name</th>
+               </tr>
+             </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.Username}}</td>
+            <td>{{user.Email}}</td>
+            <td>{{user.FirstName}}</td>
+            <td>{{user.LastName}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

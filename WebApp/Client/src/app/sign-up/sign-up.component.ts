@@ -1,36 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { User } from '../shared/user.model';
-import { EmailValidator } from '@angular/forms';
-import { UserService } from "../shared/user.service";
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { UserService } from '../shared/user.service';
 
 @Component({
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
-    styleUrls: ['./sign-up.component.css']
+    styleUrls: ['./sign-up.component.css'],
+    providers: []
 })
 export class SignUpComponent implements OnInit {
-    constructor() { }
-    test: User;
-    ngOnInit() {
-        
-        this.resetForm();
+    form: FormGroup;
+    public users = [];
+
+    constructor(fb: FormBuilder, private _userService: UserService) {
+
+        this.form = fb.group({
+            Username: ['',Validators.minLength(3)],
+            Password: ['', Validators.minLength(3)],
+            Email: ['', Validators.email],
+            FirstName: '',
+            LastName: '',
+        });
+
+    }
+    ngOnInit() { }
+
+    OnSubmit() {
+        this._userService.registerUser(this.form.value).subscribe();
     }
 
-    resetForm(form?: NgForm) {
-        if (form != null) {
-            form.reset();
-            this.test = {
-                Username: '',
-                Password: '',
-                Email: '',
-                FirstName: '',
-                LastName: ''
-            };
-        }
-    }
-
-    OnSubmit(form?: NgForm)
-    {
+    GetUser() {
+        this._userService.getUser().subscribe(
+            data => this.users = data
+        );
     }
 }
