@@ -5,13 +5,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { UserService } from './shared/user.service';
+import { UserService } from './services/user.service';
+import { ValidationComponent } from './validation/validation.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         SignUpComponent,
+        ValidationComponent,
     ],
     imports: [
         BrowserModule,

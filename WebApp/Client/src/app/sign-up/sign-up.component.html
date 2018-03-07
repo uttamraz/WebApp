@@ -8,30 +8,34 @@
     <div class="row">
       <div class="input-field col s6">
         <input type="text" class="validate" formControlName="Username" required minlength="3" maxlength="35">
-        <label>Username</label>
+        <label class="[active]">Username</label>
+        <!--<app-validation [control]="signupfrm.controls.name" class="error-msg messages text-left text-danger"></app-validation>-->
+        <!--<div *ngIf="form.get('Username').hasError('required')" class="text-danger">
+          Username is required!
+        </div>-->
       </div>
       <div class="input-field col s6">
         <input type="password" class="validate" formControlName="Password" required minlength="3" maxlength="32">
-        <label>Password</label>
+        <label class="[active]">Password</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
         <input type="email" class="validate" formControlName="Email" required maxlength="32">
-        <label>Email</label>
-        <div *ngIf="form.get('Email').errors" class="text-danger">
+        <label class="[active]">Email</label>
+        <!--<div *ngIf="form.get('Email').hasError('email')" class="text-danger">
           😢 Oh noes, this email is already taken!
-        </div>
+        </div>-->
       </div>
     </div>
     <div class="row">
       <div class="input-field col s6">
         <input type="text" class="validate" formControlName="FirstName" maxlength="20">
-        <label>First Name</label>
+        <label class="[active]">First Name</label>
       </div>
       <div class="input-field col s6">
         <input type="text" class="validate" formControlName="LastName" maxlength="20">
-        <label>Last Name</label>
+        <label class="[active]">Last Name</label>
       </div>
     </div>
     <div class="row">
@@ -51,25 +55,27 @@
 
     <div class="row">
       <button class="btn waves-effect waves-light" (click)="GetUser()">
-        GetUsers
+        Get Users
       </button>
     </div>
     <div class="row" *ngIf="users.length > 0">
       <table class="bordered striped">
-             <thead>
-               <tr>
-                 <th>Username</th>
-                 <th>Email</th>
-                 <th>First Name</th>
-                 <th>Last Name</th>
-               </tr>
-             </thead>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
         <tbody>
           <tr *ngFor="let user of users">
             <td>{{user.Username}}</td>
             <td>{{user.Email}}</td>
             <td>{{user.FirstName}}</td>
             <td>{{user.LastName}}</td>
+            <td><button class="btn waves-effect waves-light" (click)="OnEdit(user.Id)">Edit</button></td>
           </tr>
         </tbody>
       </table>

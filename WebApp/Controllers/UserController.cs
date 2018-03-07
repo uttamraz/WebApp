@@ -25,6 +25,7 @@ namespace WebApp.Controllers
             var userList = new List<AccountModel>();
             var user1 = new AccountModel
             {
+                Id = "1",
                 Username = "Kiran",
                 Password = "Password",
                 Email = "Kiran@mail.com",
@@ -34,6 +35,7 @@ namespace WebApp.Controllers
             userList.Add(user1);
             var user2 = new AccountModel
             {
+                Id = "2",
                 Username = "Dhan",
                 Password = "Password",
                 Email = "DhanSingh@mail.com",
